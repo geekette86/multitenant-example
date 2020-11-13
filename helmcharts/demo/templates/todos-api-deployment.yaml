@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todosapi
+  namespace: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: todosapi
+  template:
+    metadata:
+      labels:
+        app: todosapi
+    spec:
+      containers:
+        - name: todosapi
+          image: "{{ .Values.todosapi.image.repository }}:{{ .Values.todosapi.image.tag }}"
+          ports:
+          - containerPort: {{ .Values.todosapi.ports.containerPort }}
+          env:
+          - name: JWT_SECRET
+            value: myfancysecret
+          - name: TODO_API_PORT
+            value: "8082"
+          - name: REDIS_HOST
+            value: redisqueue
+          - name: REDIS_PORT
+            value: "6379"
+          - name: REDIS_CHANNEL
+            value: log_channel
+          - name: ZIPKIN_URL
+            value: http://zipkin:9411/api/v2/spans
+
+
+          resources:
+            requests:
+              cpu: {{ .Values.todosapi.resources.requests.cpu }}
+              memory: {{ .Values.todosapi.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.todosapi.resources.limits.cpu }}
+              memory: {{ .Values.todosapi.resources.limits.memory }}
+    

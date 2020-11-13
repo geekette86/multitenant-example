@@ -1,0 +1,133 @@
+frontend:
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: maneloyez/frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 8080
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    name: http
+    port: 80
+authapi:
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: maneloyez/auth-api
+    tag: latest
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 8081
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    name: http
+    port: 80
+redisqueue:
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: redis
+    tag: latest
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 6379
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    name: http
+    port: 80
+todosapi:
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: maneloyez/todos-api
+    tag: latest
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 8082
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    name: http
+    port: 80
+usersapi:
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: maneloyez/users-api
+    tag: latest
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 8083
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    name: http
+    port: 80
+zipkin:
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: openzipkin/zipkin
+    tag: latest
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 9411
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    name: http
+    port: 80
+logmessageprocessor:
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: maneloyez/log-message-processor
+    tag: latest
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 9001
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    name: http
+    port: 80

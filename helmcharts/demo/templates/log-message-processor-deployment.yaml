@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logmessageprocessor
+  namespace: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: logmessageprocessor
+  template:
+    metadata:
+      labels:
+        app: logmessageprocessor
+    spec:
+      containers:
+        - name: logmessageprocessor
+          image: "{{ .Values.logmessageprocessor.image.repository }}:{{ .Values.logmessageprocessor.image.tag }}"
+          ports:
+          - containerPort: {{ .Values.redisqueue.ports.containerPort }}
+          env:
+          - name: REDIS_HOST
+            value: redisqueue
+          - name: REDIS_PORT
+            value: "6379"
+          - name: REDIS_CHANNEL
+            value: log_channel
+          - name: ZIPKIN_URL
+            value: http://zipkin:9411/api/v1/spans
+ 
+
+          resources:
+            requests:
+              cpu: {{ .Values.logmessageprocessor.resources.requests.cpu }}
+              memory: {{ .Values.logmessageprocessor.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.logmessageprocessor.resources.limits.cpu }}
+              memory: {{ .Values.logmessageprocessor.resources.limits.memory }}
+    

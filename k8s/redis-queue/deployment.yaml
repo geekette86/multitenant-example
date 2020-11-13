@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: microservice-app-example
+  name: redisqueue
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: microservice-app-example
+        service: redisqueue
+    spec:
+      containers:
+      - env:
+        image: redis
+        name: redisqueue
+        ports:
+        - containerPort: 6379
+      restartPolicy: Always

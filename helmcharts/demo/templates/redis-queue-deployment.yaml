@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redisqueue
+  namespace: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: redisqueue
+  template:
+    metadata:
+      labels:
+        app: redisqueue
+    spec:
+      containers:
+        - name: redisqueue
+          image: {{ .Values.redisqueue.image.repository }}:{{ .Values.redisqueue.image.tag }}"
+          ports:
+          - containerPort: {{ .Values.redisqueue.ports.containerPort }}
+          resources:
+            requests:
+              cpu: {{ .Values.redisqueue.resources.requests.cpu }}
+              memory: {{ .Values.redisqueue.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.redisqueue.resources.limits.cpu }}
+              memory: {{ .Values.redisqueue.resources.limits.memory }}
+    

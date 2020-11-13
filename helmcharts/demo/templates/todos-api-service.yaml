@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todosapi
+  namespace: {{ .Release.Name }}
+spec:
+  type: {{ .Values.todosapi.service.type }}
+  selector:
+    app: todosapi
+  ports:
+  - name: {{ .Values.todosapi.service.name }}
+    port: {{ .Values.todosapi.service.port }}
+    targetPort: {{ .Values.todosapi.ports.containerPort }}

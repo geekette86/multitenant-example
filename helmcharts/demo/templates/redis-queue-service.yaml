@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redisqueue
+  namespace: {{ .Release.Name }}
+spec:
+  type: {{ .Values.redisqueue.service.type }}
+  selector:
+    app: redisqueue
+  ports:
+  - name: {{ .Values.redisqueue.service.name }}
+    port: {{ .Values.redisqueue.service.port }}
+    targetPort: {{ .Values.redisqueue.ports.containerPort }}

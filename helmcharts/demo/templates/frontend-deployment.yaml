@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          ports:
+          - containerPort: {{ .Values.frontend.ports.containerPort }}
+          env:
+          - name: AUTH_API_ADDRESS
+            value: http://authapi:8081
+          - name: PORT
+            value: "8080"
+          - name: TODOS_API_ADDRESS
+            value: http://todosapi:8082
+          - name: ZIPKIN_URL
+            value: http://zipkin:9411/api/v2/spans
+          resources:
+            requests:
+              cpu: {{ .Values.frontend.resources.requests.cpu }}
+              memory: {{ .Values.frontend.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.frontend.resources.limits.cpu }}
+              memory: {{ .Values.frontend.resources.limits.memory }}
+    

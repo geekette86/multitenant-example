@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: authapi
+  namespace: {{ .Release.Name }}
+spec:
+  type: {{ .Values.authapi.service.type }}
+  selector:
+    app: authapi
+  ports:
+  - name: {{ .Values.authapi.service.name }}
+    port: {{ .Values.authapi.service.port }}
+    targetPort: {{ .Values.authapi.ports.containerPort }}

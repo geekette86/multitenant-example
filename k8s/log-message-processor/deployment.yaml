@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: microservice-app-example
+  name: logmessageprocessor
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: microservice-app-example
+        service: logmessageprocessor
+    spec:
+      containers:
+      - env:
+        - name: REDIS_HOST
+          value: redisqueue
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_CHANNEL
+          value: log_channel
+        - name: ZIPKIN_URL
+          value: http://zipkin:9411/api/v1/spans
+          
+        image: logmessageprocessor
+        name: logmessageprocessor
+        imagePullPolicy: Never
+      restartPolicy: Always
