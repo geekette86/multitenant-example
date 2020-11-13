@@ -1,5 +1,19 @@
 Thank you for https://github.com/elgris/microservice-app-example for the source code of a microserice application , i used it directly to create my helmcharts and prove the multi-tenancy architecture after.
+ 
+# What is multi-tenant architecture ?
+ 
+SAAS solution in most of case are implemented base on two types of architecture ( I don't know if i can say architecture or pattern) multi tenant or multi instance , today we will talk about MT
+so MT means many clients use one application instance and it can be replicated.The advantages of this approach are:
+1. Doesn't really cost so much since resources are shared between different clients
+2. it is more simple ( kind of ) 
+3. Update one for all
 
+what we will do here is just to have an unique namespace for every tenant so just fire up
+
+```
+helm install --set name=test ./demo
+```
+The command will deploy all the services and also will take `--name` and fire it in namespace.yaml and this how we can duplicate the services for every tenant 
 
 # Example microservice app
 
