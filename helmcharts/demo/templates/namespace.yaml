@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: {{ .Release.Name }}
   labels: 
-    istio-injection: enabled
+    app: demo
