@@ -1,4 +1,4 @@
-Thank you for https://github.com/elgris/microservice-app-example for the source code of a microserice application , i used it directly to create my helmcharts and prove the multi-tenancy architecture after.
+Thank you for https://github.com/elgris/microservice-app-example for the source code of a microserice application , i used it directly to create my helmcharts and prove the multi-tenancy architecture after. Thank you @elgris
  
 # What is multi-tenant architecture ?
  
